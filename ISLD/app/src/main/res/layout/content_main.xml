@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="50dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="16dp"
+    >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+    <EditText
+        android:id = "@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"/>
+    <EditText
+        android:id="@+id/address"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Address"/>
+    <TableLayout
+        android:id ="@+id/main_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TableRow>
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="36dp"
+            android:text="S.No"
+            android:gravity="center"/>
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="250dp"
+            android:text="Item Names"
+            android:gravity="center"/>
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="72dp"
+            android:text="Quantity"
+            android:gravity="center"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id= "@+id/item1"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id= "@+id/quan1"
+            />
+    </TableRow>
+    </TableLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TableRow>
+                <Button
+                    android:id="@+id/AR"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Add Row" />
+
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="183dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone Number" />
+                <Button
+                    android:id="@+id/WM"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Send" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</RelativeLayout>
