@@ -19,13 +19,13 @@ class MainActivity : AppCompatActivity() {
 
     private var mba : BluetoothAdapter ? = null
     var tManager : TelephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-
+    var count = 0
     @SuppressLint("MissingPermission")
     var uuid = tManager.getDeviceId()
-    
+
     var myUUID: UUID= UUID.fromString(uuid.toString())
     var btSocket : BluetoothSocket?=null
-    private fun CheckBt(){
+    private fun CheckBt():Boolean{
         Toast.makeText(applicationContext,"going online",Toast.LENGTH_SHORT).show()
         mba=BluetoothAdapter.getDefaultAdapter()
 
@@ -33,9 +33,11 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,"Bluetooth is off",Toast.LENGTH_SHORT).show()
             finish()
         }
-        if (mba == null){
+        else if (mba == null){
             Toast.makeText(applicationContext,"Bluetooth is null",Toast.LENGTH_SHORT).show()
+            return false
         }
+        else{return true}
 
     }
     fun connect(){
@@ -60,6 +62,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mba=BluetoothAdapter.getDefaultAdapter()
+        if (CheckBt()){
+            connect()
+        }
+        
 
     }
 
