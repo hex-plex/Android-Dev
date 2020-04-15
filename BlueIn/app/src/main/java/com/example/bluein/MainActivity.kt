@@ -94,8 +94,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mba=BluetoothAdapter.getDefaultAdapter()
-        if (checkBt()){
+        mba = BluetoothAdapter.getDefaultAdapter()
+        if (checkBt()) {
             connect()
         }/*
         while(true){
@@ -103,7 +103,10 @@ class MainActivity : AppCompatActivity() {
                 count+=1
             }
         }*/
+        while (!inp(count = count))
+        {
 
+        }
     }
 
 }
