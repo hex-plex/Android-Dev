@@ -11,15 +11,16 @@ import android.util.Log
 import android.widget.*
 import java.io.IOException
 import java.io.InputStream
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var mba : BluetoothAdapter ? = null
 
-    var count:Int = 0
-    var uuid:UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+    public var count:Int = 0
+    public var uuid:UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
-    private fun aDD(count : Int,data:String):Boolean{
+    public fun aDD(count : Int,data:String):Boolean{
         var tl : TableLayout = findViewById(R.id.main_list)
         var row : TableRow = TableRow(this)
         var tv : TextView = TextView(this)
@@ -30,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         row.addView(tv)
         tim.setId(1000+count+1.toInt())
         val date=Calendar.getInstance().time
-        tim.setText(date.toString())
+        val df = SimpleDateFormat("KK:mm")
+        tim.setText(df.format(date).toString())
         row.addView(tim)
         msg.setId(2000+count+1.toInt())
         msg.setText(data)
@@ -78,13 +80,18 @@ class MainActivity : AppCompatActivity() {
         }
         return verdict
     }
-    fun inp(count: Int):Boolean{
+    public fun inp(count: Int):Boolean{
         var input: InputStream? = btSocket?.inputStream
         var dataByte = ByteArray(8)
         var verdict = false
+        var data :String=""
         if (input?.available()!! >0){
             input.read(dataByte)
-            val data :String = String(dataByte)
+            data += String(dataByte)
+            while(input?.available()!! >0){
+                input.read(dataByte)
+                data += String(dataByte)
+            }
             verdict=aDD(count, data)
         }
 
@@ -103,10 +110,17 @@ class MainActivity : AppCompatActivity() {
                 count+=1
             }
         }*/
-        while (!inp(count = count))
-        {
-
-        }
+        while(!inp(count=count)){}
     }
+    /*object Read: Runnable{
+        override fun run() {
+            while (true){
+                if (inp(count=count)){
+                    count+=1
+                }
+            }
+        }
+
+    }*/
 
 }
