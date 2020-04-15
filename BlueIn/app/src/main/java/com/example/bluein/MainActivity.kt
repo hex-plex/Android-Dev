@@ -14,12 +14,18 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
+var mba : BluetoothAdapter ? = null
+
+var count:Int = 0
+var uuid:UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 class MainActivity : AppCompatActivity() {
     private var mba : BluetoothAdapter ? = null
 
     public var count:Int = 0
     public var uuid:UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
-
+    // this parcticular uuid is used for hc05 and such board bluetooth communication
+    // or if to be connected with phone or any hid device we would use UUID.randomUUID() (not sure about it) for assignment or
+    // if we have control over the server client  we can hardcode it in the app
     public fun aDD(count : Int,data:String):Boolean{
         var tl : TableLayout = findViewById(R.id.main_list)
         var row : TableRow = TableRow(this)
@@ -124,3 +130,5 @@ class MainActivity : AppCompatActivity() {
     }*/
 
 }
+//
+
