@@ -15,10 +15,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var mba : BluetoothAdapter ? = null
-    var tManager : TelephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+
     var count:Int = 0
-    @SuppressLint("MissingPermission")
-    var uuid = tManager.getDeviceId()
+    var uuid:UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
     private fun aDD(count : Int,data:String):Boolean{
         var tl : TableLayout = findViewById(R.id.main_list)
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         row.addView(msg)
         return true
     }
-    var myUUID: UUID= UUID.fromString(uuid.toString())
+    //var myUUID: UUID= UUID.fromString(uuid.toString())
     var btSocket : BluetoothSocket?=null
     private fun checkBt(): Boolean {
         Toast.makeText(applicationContext,"going online",Toast.LENGTH_SHORT).show()
@@ -63,8 +62,8 @@ class MainActivity : AppCompatActivity() {
         mba?.cancelDiscovery()
         var verdict:Boolean=false
         try{
-            btSocket = device?.createRfcommSocketToServiceRecord(myUUID)
-            btSocket?.  connect()
+            btSocket = device?.createRfcommSocketToServiceRecord(uuid)
+            btSocket?.connect()
             verdict= true
         } catch (e: IOException) {
         try {
@@ -98,12 +97,12 @@ class MainActivity : AppCompatActivity() {
         mba=BluetoothAdapter.getDefaultAdapter()
         if (checkBt()){
             connect()
-        }
+        }/*
         while(true){
             if(inp(count=count)){
                 count+=1
             }
-        }
+        }*/
 
     }
 
