@@ -6,6 +6,8 @@ import android.bluetooth.BluetoothSocket
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.renderscript.ScriptGroup
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.*
@@ -13,11 +15,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
-
-var mba : BluetoothAdapter ? = null
-
-var count:Int = 0
-var uuid:UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity() {
     private var mba : BluetoothAdapter ? = null
 
@@ -116,8 +114,26 @@ class MainActivity : AppCompatActivity() {
                 count+=1
             }
         }*/
-        while(!inp(count=count)){}
+        //while(!inp(count=count)){}
+        var hand = Handler()
+        class Input :Runnable {
+            override fun run() {
+
+                    if (inp(count)) {
+                        count += 1
+                        hand.postDelayed(this, 10)
+                    }
+            }
+        }
+        var a= Input()
+        var runon :Button = findViewById(R.id.start)
+        runon.setOnClickListener{
+            hand.postDelayed(a,10)
+
+        }
+
     }
+
     /*object Read: Runnable{
         override fun run() {
             while (true){
@@ -130,5 +146,17 @@ class MainActivity : AppCompatActivity() {
     }*/
 
 }
-//
 
+/*
+class Read : Runnable,MainActivity(){
+    override fun run(){
+        while(true){
+            if (inp(count=count)){
+                count+=1
+            }
+        }
+    }
+}
+var readThread :Thread = Thread(Read())
+readThread.start()
+*/
